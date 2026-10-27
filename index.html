@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مكتبة محمد رگادي</title>
+<meta name="description" content="مكتبة محمد رگادي: اقرأ وحمّل كتبك المفضلة مجانًا.">
+<meta property="og:title" content="مكتبة محمد رگادي">
+<meta property="og:description" content="اقرأ وحمّل كتبك المفضلة مجانًا.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f7f5f0;--surface:#fff;--ink:#1b2430;--mute:#5d6877;--line:#e3dfd6;--brand:#0e5c63;--brand-ink:#fff;--gold:#b5832a;--hero:#12303a;--hero-ink:#f3efe4}
+@media (prefers-color-scheme:dark){:root{--bg:#10171c;--surface:#18232b;--ink:#eae6dc;--mute:#9aa6b2;--line:#2a3944;--brand:#4fb3ba;--brand-ink:#082126;--gold:#d9a649;--hero:#0b2229}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif;line-height:1.7}
+h1,h2{font-family:Amiri,"Traditional Arabic",serif;margin:0;line-height:1.35}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+header{background:var(--hero);color:var(--hero-ink);border-bottom:4px solid var(--gold);background-image:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.3)),repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 24px,transparent 24px 48px)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.logo{font-family:Amiri,serif;font-size:1.5rem;font-weight:700}
+.logo small{display:block;font-family:Cairo,sans-serif;font-size:.72rem;font-weight:400;opacity:.75;margin-top:-6px}
+.nb{background:transparent;border:1px solid rgba(243,239,228,.4);color:var(--hero-ink);border-radius:8px;padding:6px 14px}
+.nb:hover{background:rgba(255,255,255,.1)}
+.hero{padding:34px 0 52px}
+.hero h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:700;max-width:16ch}
+.hero p{max-width:52ch;opacity:.85;margin:10px 0 24px}
+.search input{width:100%;max-width:560px;padding:12px 16px;border-radius:10px;border:0;background:#fff;color:#1b2430}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);border:0;border-radius:10px;padding:10px 20px;font-weight:600;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.gold{background:var(--gold);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 16px}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.count{color:var(--mute);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:30px 22px;padding-bottom:70px}
+.card{background:none;border:0;border-bottom:6px solid var(--line);padding:0 0 12px;text-align:start;border-radius:2px}
+.card:hover{border-bottom-color:var(--gold)}
+.cover{aspect-ratio:2/3;border-radius:4px 10px 10px 4px;padding:18px 14px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:-5px 6px 0 rgba(0,0,0,.14);transition:transform .2s}
+.card:hover .cover{transform:translateY(-4px)}
+.cover::after{content:"";position:absolute;inset:0 0 0 auto;width:9px;background:rgba(0,0,0,.22)}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover b{font-family:Amiri,serif;font-size:1.25rem;line-height:1.35;position:relative}
+.cover span{font-size:.8rem;opacity:.9;position:relative}
+.meta{margin-top:10px}
+.meta strong{display:block;line-height:1.4}
+.meta small{color:var(--mute)}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:50px 0}
+.ov{position:fixed;inset:0;background:rgba(8,14,18,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+.ov.on{display:flex}
+.box{background:var(--surface);border-radius:14px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:24px}
+.det{display:grid;grid-template-columns:150px 1fr;gap:20px}
+.det h2{font-size:1.8rem}
+.tags{color:var(--mute);margin:4px 0 12px}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.note{font-size:.85rem;color:var(--mute)}
+.rd{position:fixed;inset:0;background:var(--bg);z-index:30;display:none;flex-direction:column}
+.rd.on{display:flex}
+.rd .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);gap:10px;flex-wrap:wrap}
+.rd iframe{flex:1;border:0;width:100%;background:#fff}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-start:0;width:300px;max-width:86vw;background:var(--surface);z-index:40;transform:translateX(105%);transition:transform .25s;overflow:auto;box-shadow:-8px 0 30px rgba(0,0,0,.25)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:var(--hero);color:var(--hero-ink);font-family:Amiri,serif;font-size:1.3rem}
+.drawer a,.drawer .dl{display:flex;align-items:center;gap:10px;width:100%;padding:14px 20px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);text-decoration:none;text-align:start}
+.drawer a:hover,.drawer .dl:hover{background:var(--bg)}
+.drawer i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.drawer .wa i{background:#1f9d55}.drawer .fb i{background:#1877f2}
+.drawer .note{padding:12px 20px}
+.scrim{position:fixed;inset:0;background:rgba(8,14,18,.6);z-index:35;display:none}
+.scrim.on{display:block}
+.fab{position:fixed;inset-inline-end:16px;bottom:16px;background:#1f9d55;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:15}
+footer{border-top:1px solid var(--line);padding:26px 0 80px;color:var(--mute);text-align:center}
+@media (max-width:560px){.det{grid-template-columns:1fr}.det .cover{max-width:140px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <nav>
+   <div class="logo">مكتبة محمد رگادي<small>اقرأ وحمّل كتبك المفضلة</small></div>
+   <button class="nb" id="menuBtn" aria-expanded="false" aria-controls="drawer">☰ القائمة</button>
+  </nav>
+  <div class="hero">
+   <h1>كتب تُقرأ وتُحمَّل مجانًا</h1>
+   <p>مجموعة يضيفها محمد رگادي لكل قارئ. ابحث عن كتاب، اقرأه في المتصفح أو حمّله على جهازك.</p>
+   <div class="search"><input id="q" type="search" placeholder="ابحث بعنوان الكتاب أو المؤلف" aria-label="بحث"></div>
+  </div>
+ </div>
+</header>
+<main class="wrap">
+ <div class="chips" id="chips" role="group" aria-label="التصنيفات"></div>
+ <p class="count" id="count"></p>
+ <div class="grid" id="grid"></div>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> مكتبة محمد رگادي. جميع الحقوق محفوظة.</div></footer>
+
+<aside class="drawer" id="drawer" aria-label="القائمة الجانبية">
+ <div class="dh"><span>مكتبة محمد رگادي</span><button class="nb" id="menuX" aria-label="إغلاق القائمة">✕</button></div>
+ <button class="dl" data-go="top">الرئيسية</button>
+ <button class="dl" data-go="grid">جميع الكتب</button>
+ <a class="wa" href="https://wa.me/212676450379" target="_blank" rel="noopener"><i></i>تواصل عبر واتساب</a>
+ <a class="fb" href="https://www.facebook.com/0reggadi" target="_blank" rel="noopener"><i></i>حسابي على فيسبوك</a>
+ <p class="note">لطلب كتاب أو الاقتراح، راسل محمد رگادي.</p>
+</aside>
+<div class="scrim" id="scrim"></div>
+<a class="fab" href="https://wa.me/212676450379" target="_blank" rel="noopener">واتساب</a>
+
+<div class="ov" id="detOv"><div class="box" id="detBox" role="dialog" aria-modal="true"></div></div>
+<div class="rd" id="rd">
+ <div class="bar"><strong id="rdT"></strong><span><a class="btn alt" id="rdNew" target="_blank" rel="noopener">فتح في نافذة جديدة</a> <a class="btn gold" id="rdDl" download>تحميل</a> <button class="btn" id="rdX">إغلاق</button></span></div>
+ <iframe id="rdF" title="قارئ الكتاب"></iframe>
+</div>
+
+<script>
+var COLORS=["#0e5c63","#7a3b2e","#2f4a7d","#5b3f7a","#3f6b3a","#8a5a14","#9b2f4f"];
+var books=[],cat="الكل",$=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function cover(b,i){var img=b.cover?'<img src="'+esc(b.cover)+'" alt="" loading="lazy" onerror="this.remove()">':"";return '<div class="cover" style="background:'+COLORS[i%COLORS.length]+'">'+img+'<b>'+esc(b.title)+'</b><span>'+esc(b.author)+'</span></div>'}
+function render(){
+ var q=$("q").value.trim().toLowerCase(),cats=["الكل"];
+ books.forEach(function(b){if(b.cat&&cats.indexOf(b.cat)<0)cats.push(b.cat)});
+ if(cats.indexOf(cat)<0)cat="الكل";
+ $("chips").innerHTML=cats.map(function(c){return '<button class="chip" aria-pressed="'+(c===cat)+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+ var list=books.filter(function(b){return(cat==="الكل"||b.cat===cat)&&(!q||((b.title||"")+" "+(b.author||"")).toLowerCase().indexOf(q)>-1)});
+ $("count").textContent=list.length+" كتاب";
+ $("grid").innerHTML=list.length?list.map(function(b){var i=books.indexOf(b);return '<button class="card" data-i="'+i+'">'+cover(b,i)+'<div class="meta"><strong>'+esc(b.title)+'</strong><small>'+esc(b.author)+(b.cat?" • "+esc(b.cat):"")+'</small></div></button>'}).join(""):'<div class="empty">لا توجد كتب مطابقة. جرّب كلمة أخرى.</div>';
+}
+function openDet(i){
+ var b=books[i],has=!!b.file;
+ $("detBox").innerHTML='<div class="det">'+cover(b,i)+'<div><h2>'+esc(b.title)+'</h2><div class="tags">'+esc(b.author)+(b.cat?" • "+esc(b.cat):"")+'</div><p>'+esc(b.desc||"لا يوجد وصف لهذا الكتاب.")+'</p><div class="acts">'+(has?'<button class="btn" data-a="read" data-i="'+i+'">اقرأ الآن</button><a class="btn gold" href="'+esc(b.file)+'" download>حمّل الكتاب</a>':'<span class="note">الملف غير متوفر بعد لهذا الكتاب.</span>')+'<button class="btn alt" data-a="close">إغلاق</button></div></div></div>';
+ $("detOv").classList.add("on");
+}
+function closeDet(){$("detOv").classList.remove("on")}
+function readBook(i){var b=books[i];$("rdT").textContent=b.title;$("rdF").src=b.file;$("rdNew").href=b.file;$("rdDl").href=b.file;$("rd").classList.add("on")}
+function closeRd(){$("rd").classList.remove("on");$("rdF").src="about:blank"}
+function menu(on){$("drawer").classList.toggle("on",on);$("scrim").classList.toggle("on",on);$("menuBtn").setAttribute("aria-expanded",on)}
+document.addEventListener("click",function(e){
+ var t=e.target.closest("[data-a],[data-c],.card");
+ if(!t){if(e.target===$("detOv"))closeDet();return}
+ if(t.dataset.c){cat=t.dataset.c;render();return}
+ if(t.classList.contains("card")){openDet(+t.dataset.i);return}
+ if(t.dataset.a==="close")closeDet();
+ if(t.dataset.a==="read"){closeDet();readBook(+t.dataset.i)}
+});
+$("menuBtn").onclick=function(){menu(true)};
+$("menuX").onclick=$("scrim").onclick=function(){menu(false)};
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){menu(false);(b.dataset.go==="top"?document.body:$("grid")).scrollIntoView({behavior:"smooth"})}});
+$("q").oninput=render;
+$("rdX").onclick=closeRd;
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeDet();closeRd();menu(false)}});
+$("yr").textContent=new Date().getFullYear();
+fetch("books.json?v="+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){books=Array.isArray(d)?d:[];render()}).catch(function(){$("grid").innerHTML='<div class="empty">تعذّر تحميل قائمة الكتب. تأكد أن الملف books.json موجود بجانب index.html، وافتح الموقع من رابط GitHub Pages وليس بالنقر المزدوج على الملف.</div>'});
+</script>
+</body>
+</html>
